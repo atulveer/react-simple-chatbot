@@ -33,10 +33,16 @@ class TextStep extends Component {
   }
 
   getMessage = () => {
-    const { previousValue, step } = this.props;
-    const { message } = step;
+    const { previousValue, step, simulateUserWithSteps } = this.props;
 
-    return message ? message.replace(/{previousValue}/g, previousValue) : '';
+    // When simulateUserWithSteps flag is on render Placeholder.
+    if (simulateUserWithSteps && step.placeholder) {      
+      const { placeholder } = step;
+      return placeholder;
+    }else {
+      const { message } = step;
+      return message ? message.replace(/{previousValue}/g, previousValue) : '';
+    }  
   }
 
   renderMessage = () => {
